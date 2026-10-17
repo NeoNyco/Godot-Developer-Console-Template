@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://jj1gglaspqq1"]
+
+[ext_resource type="Script" uid="uid://dyrrlp7fdi8wr" path="res://developer_console/core/developer_console.gd" id="1_xus3s"]
+[ext_resource type="Script" uid="uid://w4qkp7dsxof3" path="res://developer_console/resource/console_command.gd" id="2_yebj2"]
+[ext_resource type="Script" uid="uid://c5xwjxam4vcst" path="res://developer_console/resource/command_argument.gd" id="3_ob4wf"]
+[ext_resource type="Script" uid="uid://dlf3cj1pw76dy" path="res://developer_console/commands/COMMANG_help.gd" id="4_r88yq"]
+[ext_resource type="Script" uid="uid://4kfmvb3c6p5f" path="res://developer_console/commands/COMMAND_get_node_child_count.gd" id="5_sfxe1"]
+[ext_resource type="Script" uid="uid://dj8ry7pg7qin2" path="res://developer_console/core/console_node.gd" id="6_2y24q"]
+
+[sub_resource type="CodeHighlighter" id="CodeHighlighter_a2u20"]
+
+[sub_resource type="Resource" id="Resource_b8fvy"]
+script = ExtResource("4_r88yq")
+metadata/_custom_type_script = "uid://dlf3cj1pw76dy"
+
+[sub_resource type="Resource" id="Resource_fs1r3"]
+script = ExtResource("5_sfxe1")
+metadata/_custom_type_script = "uid://4kfmvb3c6p5f"
+
+[node name="DeveloperConsoleDemo" type="Control" unique_id=693510753]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=180336452]
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 285.0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=677807387]
+custom_minimum_size = Vector2(500, 250)
+layout_mode = 2
+
+[node name="History" type="RichTextLabel" parent="VBoxContainer/PanelContainer" unique_id=1708105129]
+custom_minimum_size = Vector2(500, 250)
+layout_mode = 2
+size_flags_horizontal = 17
+size_flags_vertical = 17
+
+[node name="CodeEdit" type="CodeEdit" parent="VBoxContainer" unique_id=515241228]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+caret_type = 1
+caret_blink = true
+syntax_highlighter = SubResource("CodeHighlighter_a2u20")
+code_completion_enabled = true
+
+[node name="DeveloperConsole" type="Node" parent="." unique_id=177077770 node_paths=PackedStringArray("_history", "_input_field")]
+script = ExtResource("1_xus3s")
+_history = NodePath("../VBoxContainer/PanelContainer/History")
+_input_field = NodePath("../VBoxContainer/CodeEdit")
+console_commands = Array[ExtResource("2_yebj2")]([SubResource("Resource_b8fvy"), SubResource("Resource_fs1r3")])
+
+[node name="ConsoleNode" type="Node" parent="." unique_id=732397626]
+script = ExtResource("6_2y24q")
+metadata/_custom_type_script = "uid://dj8ry7pg7qin2"
